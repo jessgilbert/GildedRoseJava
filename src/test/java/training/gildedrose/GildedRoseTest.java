@@ -116,7 +116,7 @@ public class GildedRoseTest {
 
     @Test
     public void SulfurasSellInDoesntChange() {
-        Item sulfuras = new Item("Sulfuras, Hand of Ragnaros", 10, 80);
+        Item sulfuras = new Item("Sulfuras, Hand of Ragnaros", 0, 80);
 
         Item[] items = new Item[] { sulfuras};
         GildedRose gildedRose = new GildedRose(items);
@@ -126,7 +126,7 @@ public class GildedRoseTest {
             gildedRose.updateQuality();
         }
         // Assert
-        assertThat(sulfuras.sellIn).isEqualTo(10);
+        assertThat(sulfuras.sellIn).isEqualTo(0);
     }
 
     @Test
@@ -183,5 +183,20 @@ public class GildedRoseTest {
         gildedRose.updateQuality();
 
         assertThat(conjured.quality).isEqualTo(36);
+    }
+
+    @Test
+    public void SulfurasQualityIsUpdatedTo80() {
+        Item sulfuras = new Item("Sulfuras, Hand of Ragnaros", 10, 50);
+
+        Item[] items = new Item[] { sulfuras};
+        GildedRose gildedRose = new GildedRose(items);
+
+        for(int j = 50; j >=0; j--) {
+            // Act
+            gildedRose.updateQuality();
+        }
+        // Assert
+        assertThat(sulfuras.quality).isEqualTo(80);
     }
 }
